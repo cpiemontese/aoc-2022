@@ -1,8 +1,7 @@
 defmodule Aoc2022Test do
   use ExUnit.Case
 
-  test "day1 is able to compute the most calories carried by an elf" do
-    calories = "1000
+  @calories "1000
 2000
 3000
 
@@ -17,13 +16,22 @@ defmodule Aoc2022Test do
 
 10000"
 
-    tmp_file_path = "./test/tmp_file.txt"
-    file = File.open!(tmp_file_path, [:write])
+  test "day1 first part is able to compute the most calories carried by an elf" do
+    result = @calories |> mk_tmp_file() |> Aoc2022.Day1.first()
+    assert result == 24_000
+  end
+
+  test "day1 second part is able to compute the most calories carried by the top three elves" do
+    result = @calories |> mk_tmp_file() |> Aoc2022.Day1.second()
+    assert result == 45_000
+  end
+
+  def mk_tmp_file(input) do
+    tmp_file_path = "./test/tmp_file#{Enum.random(0..10000)}.txt"
+
+    File.write!(tmp_file_path, input)
     on_exit(fn -> File.rm!(tmp_file_path) end)
 
-    File.write!(tmp_file_path, calories)
-
-    result = Aoc2022.Day1.run(tmp_file_path)
-    assert result == 24_000
+    tmp_file_path
   end
 end
