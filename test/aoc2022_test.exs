@@ -37,6 +37,11 @@ C Z"
       result = @strategy_guide |> mk_tmp_file() |> Aoc2022.Day2.first()
       assert result == 15
     end
+
+    test "second part is able to compute correct total score of strategy guide" do
+      result = @strategy_guide |> mk_tmp_file() |> Aoc2022.Day2.second()
+      assert result == 12
+    end
   end
 
   def mk_tmp_file(input) do
