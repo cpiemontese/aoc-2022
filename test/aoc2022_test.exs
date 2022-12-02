@@ -1,7 +1,8 @@
 defmodule Aoc2022Test do
   use ExUnit.Case
 
-  @calories "1000
+  describe "day1" do
+    @calories "1000
 2000
 3000
 
@@ -16,7 +17,6 @@ defmodule Aoc2022Test do
 
 10000"
 
-  describe "day1" do
     test "first part is able to compute the most calories carried by an elf" do
       result = @calories |> mk_tmp_file() |> Aoc2022.Day1.first()
       assert result == 24_000
@@ -25,6 +25,17 @@ defmodule Aoc2022Test do
     test "second part is able to compute the most calories carried by the top three elves" do
       result = @calories |> mk_tmp_file() |> Aoc2022.Day1.second()
       assert result == 45_000
+    end
+  end
+
+  describe "day2" do
+    @strategy_guide "A Y
+B X
+C Z"
+
+    test "first part is able to compute total score of strategy guide" do
+      result = @strategy_guide |> mk_tmp_file() |> Aoc2022.Day2.first()
+      assert result == 15
     end
   end
 
