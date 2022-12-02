@@ -39,11 +39,8 @@ defmodule Aoc2022.Day2 do
   def round_points(elf, me) do
     result =
       cond do
-        # Draw
         elf == me -> 3
-        # I win
         is_beat_by(elf) == me -> 6
-        # I lose
         true -> 0
       end
 
