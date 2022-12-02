@@ -1,9 +1,9 @@
 defmodule Aoc2022.Day1 do
   def first(input_file) do
-    stream = File.stream!(input_file)
-
     {_, max} =
-      Enum.reduce(stream, {0, -1}, fn element, {sum, current_max} ->
+      input_file
+      |> File.stream!()
+      |> Enum.reduce({0, -1}, fn element, {sum, current_max} ->
         case element do
           "\n" ->
             {0, max(sum, current_max)}
@@ -17,11 +17,9 @@ defmodule Aoc2022.Day1 do
   end
 
   def second(input_file) do
-    stream = File.stream!(input_file)
-
-    elves_calories = parse_elves_calories(stream)
-
-    elves_calories
+    input_file
+    |> File.stream!()
+    |> parse_elves_calories()
     |> Enum.map(fn elf_calories ->
       Enum.sum(elf_calories)
     end)
