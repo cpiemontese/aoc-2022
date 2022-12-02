@@ -16,14 +16,16 @@ defmodule Aoc2022Test do
 
 10000"
 
-  test "day1 first part is able to compute the most calories carried by an elf" do
-    result = @calories |> mk_tmp_file() |> Aoc2022.Day1.first()
-    assert result == 24_000
-  end
+  describe "day1" do
+    test "first part is able to compute the most calories carried by an elf" do
+      result = @calories |> mk_tmp_file() |> Aoc2022.Day1.first()
+      assert result == 24_000
+    end
 
-  test "day1 second part is able to compute the most calories carried by the top three elves" do
-    result = @calories |> mk_tmp_file() |> Aoc2022.Day1.second()
-    assert result == 45_000
+    test "second part is able to compute the most calories carried by the top three elves" do
+      result = @calories |> mk_tmp_file() |> Aoc2022.Day1.second()
+      assert result == 45_000
+    end
   end
 
   def mk_tmp_file(input) do
