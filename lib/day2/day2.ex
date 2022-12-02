@@ -37,14 +37,10 @@ defmodule Aoc2022.Day2 do
   def parse_choice("Z"), do: :scissors
 
   def round_points(elf, me) do
-    result =
-      cond do
-        elf == me -> 3
-        is_beat_by(elf) == me -> 6
-        true -> 0
-      end
-
-    IO.inspect({elf, me, result})
-    result
+    cond do
+      elf == me -> 3
+      is_beat_by(elf) == me -> 6
+      true -> 0
+    end
   end
 end
