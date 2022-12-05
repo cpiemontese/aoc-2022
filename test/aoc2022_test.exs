@@ -82,6 +82,24 @@ CrZsJsPPZsGzwwsLwLmpwMDw"
     end
   end
 
+  describe "day5" do
+    @moves "move 1 from 2 to 1
+move 3 from 1 to 3
+move 2 from 2 to 1
+move 1 from 1 to 2"
+
+    @input_state %{
+      1 => ["N", "Z"],
+      2 => ["D", "C", "M"],
+      3 => ["P"]
+    }
+
+    test "first part is able to compute the top crates" do
+      result = @moves |> mk_tmp_file() |> Aoc2022.Day5.first(@input_state)
+      assert result == ["C", "M", "Z"]
+    end
+  end
+
   def mk_tmp_file(input) do
     tmp_file_path = "./test/tmp_file#{Enum.random(0..10000)}.txt"
 
