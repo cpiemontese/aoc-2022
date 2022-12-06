@@ -28,12 +28,8 @@ defmodule Aoc2022.Day6 do
     unique_letters =
       datastream
       |> Enum.slice(index, marker_size)
-      |> Enum.reduce(%{}, fn element, acc ->
-        prev = Map.get(acc, element, 0)
-        Map.put(acc, element, prev + 1)
-      end)
-      |> Map.keys()
-      |> Enum.count()
+      |> MapSet.new()
+      |> MapSet.size()
 
     if unique_letters == marker_size,
       do: index + marker_size,
