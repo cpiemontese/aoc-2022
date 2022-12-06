@@ -139,6 +139,28 @@ move 1 from 1 to 2"
     end
   end
 
+  describe "day6" do
+    test "first part is able to compute position of first packet marker from examples" do
+      data = [
+        {"mjqjpqmgbljsphdztnvjfqwrcgsmlb", 7},
+        {"bvwbjplbgvbhsrlpgdmjqwftvncz", 5},
+        {"nppdvjthqldpwncqszvftbrmjlhg", 6},
+        {"nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 10},
+        {"zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 11}
+      ]
+
+      Enum.each(data, fn {input, expected_result} ->
+        result = input |> mk_tmp_file() |> Aoc2022.Day6.first()
+        assert expected_result == result
+      end)
+    end
+
+    test "first part is able to compute position of first packet marker from input" do
+      result = Aoc2022.Day6.first("inputs/day6.txt")
+      assert result == 0
+    end
+  end
+
   def mk_tmp_file(input) do
     tmp_file_path = "./test/tmp_file#{Enum.random(0..10000)}.txt"
 
