@@ -96,7 +96,7 @@ move 1 from 1 to 2"
 
     test "first part is able to compute the top crates of example" do
       result = @moves |> mk_tmp_file() |> Aoc2022.Day5.first(@input_state)
-      assert result == ["C", "M", "Z"]
+      assert result == "CMZ"
     end
 
     test "first part is able to compute top crates of input" do
@@ -113,7 +113,29 @@ move 1 from 1 to 2"
           9 => ["H", "F", "N", "G"]
         })
 
-      assert result == ["T", "D", "C", "H", "V", "H", "J", "T", "G"]
+      assert result == "TDCHVHJTG"
+    end
+
+    test "second part is able to compute the top crates of example" do
+      result = @moves |> mk_tmp_file() |> Aoc2022.Day5.second(@input_state)
+      assert result == "MCD"
+    end
+
+    test "second part is able to compute top crates of input" do
+      result =
+        Aoc2022.Day5.second("inputs/day5.txt", %{
+          1 => ["F", "T", "N", "Z", "M", "G", "H", "J"],
+          2 => ["J", "W", "V"],
+          3 => ["H", "T", "B", "J", "L", "V", "G"],
+          4 => ["L", "V", "D", "C", "N", "J", "P", "B"],
+          5 => ["G", "R", "P", "M", "S", "W", "F"],
+          6 => ["M", "V", "N", "B", "F", "C", "H", "G"],
+          7 => ["R", "M", "G", "H", "D"],
+          8 => ["D", "Z", "V", "M", "N", "H"],
+          9 => ["H", "F", "N", "G"]
+        })
+
+      assert result == "NGCMPJLHV"
     end
   end
 
