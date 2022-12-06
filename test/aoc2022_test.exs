@@ -157,7 +157,27 @@ move 1 from 1 to 2"
 
     test "first part is able to compute position of first packet marker from input" do
       result = Aoc2022.Day6.first("inputs/day6.txt")
-      assert result == 0
+      assert result == 1080
+    end
+
+    test "second part is able to compute position of start message packet marker from examples" do
+      data = [
+        {"mjqjpqmgbljsphdztnvjfqwrcgsmlb", 19},
+        {"bvwbjplbgvbhsrlpgdmjqwftvncz", 23},
+        {"nppdvjthqldpwncqszvftbrmjlhg", 23},
+        {"nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 29},
+        {"zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 26}
+      ]
+
+      Enum.each(data, fn {input, expected_result} ->
+        result = input |> mk_tmp_file() |> Aoc2022.Day6.second()
+        assert expected_result == result
+      end)
+    end
+
+    test "second part is able to compute position of start message marker from input" do
+      result = Aoc2022.Day6.second("inputs/day6.txt")
+      assert result == 3645
     end
   end
 
