@@ -181,6 +181,37 @@ move 1 from 1 to 2"
     end
   end
 
+  describe "day7" do
+    @input "$ cd /
+$ ls
+dir a
+14848514 b.txt
+8504156 c.dat
+dir d
+$ cd a
+$ ls
+dir e
+29116 f
+2557 g
+62596 h.lst
+$ cd e
+$ ls
+584 i
+$ cd ..
+$ cd ..
+$ cd d
+$ ls
+4060174 j
+8033020 d.log
+5626152 d.ext
+7214296 k"
+
+    test "first part is able to compute total size of directories with at most 100_000 of size" do
+      result = @input |> mk_tmp_file() |> Aoc2022.Day7.first(100_000)
+      assert result == 95_437
+    end
+  end
+
   def mk_tmp_file(input) do
     tmp_file_path = "./test/tmp_file#{Enum.random(0..10000)}.txt"
 
