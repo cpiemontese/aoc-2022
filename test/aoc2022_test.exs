@@ -210,6 +210,11 @@ $ ls
       result = @input |> mk_tmp_file() |> Aoc2022.Day7.first(100_000)
       assert result == 95_437
     end
+
+    test "first part is able to compute total size of directories with at most 100_000 of size from official input" do
+      result = Aoc2022.Day7.first("inputs/day7.txt", 100_000)
+      assert result == 95_437
+    end
   end
 
   def mk_tmp_file(input) do
