@@ -14,7 +14,7 @@ defmodule Aoc2022.Day7 do
     input_path
   end
 
-  defp traverse(terminal_output), do: do_traverse(terminal_output, %{}, [])
+  defp traverse(terminal_output), do: do_traverse(terminal_output, %{"/" => %{}}, [])
 
   defp do_traverse(terminal_output, file_system, current_path)
 
@@ -33,14 +33,16 @@ defmodule Aoc2022.Day7 do
   defp do_traverse(["$ ls" | rest], file_system, current_path),
     do: do_traverse(rest, file_system, current_path)
 
+  defp do_traverse(["dir " <> dir | rest], file_system, current_path) do
+    file_system = put_in(file_system, current_path ++ [dir], %{})
+    do_traverse(rest, file_system, current_path)
+  end
+
   defp do_traverse([ls_result | rest], file_system, current_path) do
     [ls1, ls2] = String.split(ls_result, " ")
 
-    file_system =
-      case Integer.parse(ls1) do
-        {parsed, _} -> put_in(file_system, nested_key(current_path ++ [ls2]), parsed)
-        _ -> file_system
-      end
+    parsed = String.to_integer(ls1)
+    file_system = put_in(file_system, current_path ++ [ls2], parsed)
 
     do_traverse(rest, file_system, current_path)
   end
@@ -66,6 +68,4 @@ defmodule Aoc2022.Day7 do
 
     [{curr_dir, sum_of_directories + file_sizes} | directories]
   end
-
-  defp nested_key(keys), do: keys |> Enum.map(&Access.key(&1, %{}))
 end
