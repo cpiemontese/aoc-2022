@@ -20,21 +20,19 @@ defmodule Aoc2022.Day7 do
 
   defp do_traverse([], file_system, _current_path), do: file_system
 
-  defp do_traverse(["$ cd .." | rest], file_system, current_path) do
-    {_, current_path} = List.pop_at(current_path, -1)
+  defp do_traverse(["$ cd .." | rest], file_system, [_ | current_path]) do
     do_traverse(rest, file_system, current_path)
   end
 
   defp do_traverse(["$ cd " <> arg | rest], file_system, current_path) do
-    current_path = current_path ++ [arg]
-    do_traverse(rest, file_system, current_path)
+    do_traverse(rest, file_system, [arg | current_path])
   end
 
   defp do_traverse(["$ ls" | rest], file_system, current_path),
     do: do_traverse(rest, file_system, current_path)
 
   defp do_traverse(["dir " <> dir | rest], file_system, current_path) do
-    file_system = put_in(file_system, current_path ++ [dir], %{})
+    file_system = put_in(file_system, Enum.reverse([dir | current_path]), %{})
     do_traverse(rest, file_system, current_path)
   end
 
@@ -42,7 +40,7 @@ defmodule Aoc2022.Day7 do
     [ls1, ls2] = String.split(ls_result, " ")
 
     parsed = String.to_integer(ls1)
-    file_system = put_in(file_system, current_path ++ [ls2], parsed)
+    file_system = put_in(file_system, Enum.reverse([ls2 | current_path]), parsed)
 
     do_traverse(rest, file_system, current_path)
   end
@@ -62,9 +60,9 @@ defmodule Aoc2022.Day7 do
       |> Enum.flat_map(&do_compute_size_of_directories(file_system[&1], &1))
 
     sum_of_directories =
-      Enum.reduce(directories, 0, fn {_dir, size}, acc ->
-        acc + size
-      end)
+      directories
+      |> Enum.map(fn {_dir, size} -> size end)
+      |> Enum.sum()
 
     [{curr_dir, sum_of_directories + file_sizes} | directories]
   end
