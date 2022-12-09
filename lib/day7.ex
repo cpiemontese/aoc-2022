@@ -1,17 +1,39 @@
 defmodule Aoc2022.Day7 do
-  def first(input_path, total_size) do
+  @size_limit 100_000
+
+  def first(input_path) do
     input_path
     |> File.read!()
     |> String.split("\n")
     |> traverse()
     |> compute_size_of_directories()
-    |> Enum.filter(fn {_, size} -> size <= total_size end)
+    |> Enum.filter(fn {_, size} -> size <= @size_limit end)
     |> Enum.map(fn {_, size} -> size end)
     |> Enum.sum()
   end
 
+  @max_space 70_000_000
+  @unused_space_needed 30_000_000
+
   def second(input_path) do
-    input_path
+    size_of_directories =
+      input_path
+      |> File.read!()
+      |> String.split("\n")
+      |> traverse()
+      |> compute_size_of_directories()
+
+    {_, root_dir_size} = Enum.find(size_of_directories, fn {dir, _} -> dir == "/" end)
+    available_space = @max_space - root_dir_size
+    space_to_free = @unused_space_needed - available_space
+
+    {dir, _} =
+      size_of_directories
+      |> Enum.filter(fn {_, size} -> size >= space_to_free end)
+      |> IO.inspect()
+      |> Enum.min_by(fn {_, size} -> size end)
+
+    dir
   end
 
   defp traverse(terminal_output), do: do_traverse(terminal_output, %{"/" => %{}}, [])
@@ -52,7 +74,10 @@ defmodule Aoc2022.Day7 do
     keys = Map.keys(file_system)
 
     file_sizes =
-      keys |> Enum.filter(&(!is_map(file_system[&1]))) |> Enum.map(&file_system[&1]) |> Enum.sum()
+      keys
+      |> Enum.filter(&(not is_map(file_system[&1])))
+      |> Enum.map(&file_system[&1])
+      |> Enum.sum()
 
     directories =
       keys
