@@ -259,7 +259,7 @@ $ ls
     end
 
     test "first part is able to compute visible trees of official input" do
-      result = Aoc2022.Day8.first("inputs/day7.txt")
+      result = Aoc2022.Day8.first("inputs/day8.txt")
       assert result == 0
     end
   end
