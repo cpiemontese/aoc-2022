@@ -235,14 +235,14 @@ $ ls
       assert result == 1_443_806
     end
 
-    test "second part is able to size of directory to delete from example" do
+    test "second part is able to compute size of directory to delete from example" do
       result = @input |> mk_tmp_file() |> Aoc2022.Day7.second()
       assert result == 24_933_642
     end
 
-    test "second part is able to size of directory to delete from official input" do
+    test "second part is able to compute size of directory to delete from official input" do
       result = Aoc2022.Day7.second("inputs/day7.txt")
-      assert result == 0
+      assert result == 942_298
     end
   end
 
