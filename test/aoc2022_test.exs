@@ -260,6 +260,16 @@ $ ls
 
     test "first part is able to compute visible trees of official input" do
       result = Aoc2022.Day8.first("inputs/day8.txt")
+      assert result == 1814
+    end
+
+    test "second part is able to compute highest scenic score of example" do
+      result = @input |> mk_tmp_file() |> Aoc2022.Day8.second()
+      assert result == 8
+    end
+
+    test "second part is able to compute highest scenic score of official input" do
+      result = Aoc2022.Day8.second("inputs/day8.txt")
       assert result == 0
     end
   end
