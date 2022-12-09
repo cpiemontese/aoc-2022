@@ -246,6 +246,24 @@ $ ls
     end
   end
 
+  describe "day8" do
+    @input "30373
+25512
+65332
+33549
+35390"
+
+    test "first part is able to compute visible trees of example" do
+      result = @input |> mk_tmp_file() |> Aoc2022.Day8.first()
+      assert result == 21
+    end
+
+    test "first part is able to compute visible trees of official input" do
+      result = Aoc2022.Day8.first("inputs/day7.txt")
+      assert result == 0
+    end
+  end
+
   def mk_tmp_file(input) do
     tmp_file_path = "./test/tmp_file#{Enum.random(0..10000)}.txt"
 
