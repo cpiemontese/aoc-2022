@@ -39,16 +39,24 @@ defmodule Aoc2022.Day8 do
       tree_height = Enum.at(flat_input, get_idx(row, col, cols))
 
       left_vis_score =
-        left_trees |> Enum.find_index(&(&1 >= tree_height)) |> sum_or_default(1, col - 1)
+        left_trees
+        |> Enum.find_index(&(&1 >= tree_height))
+        |> sum_or_default(1, col)
 
       right_vis_score =
-        right_trees |> Enum.find_index(&(&1 >= tree_height)) |> sum_or_default(1, cols - col - 1)
+        right_trees
+        |> Enum.find_index(&(&1 >= tree_height))
+        |> sum_or_default(1, cols - col - 1)
 
       up_vis_score =
-        up_trees |> Enum.find_index(&(&1 >= tree_height)) |> sum_or_default(1, row - 1)
+        up_trees
+        |> Enum.find_index(&(&1 >= tree_height))
+        |> sum_or_default(1, row)
 
       down_vis_score =
-        down_trees |> Enum.find_index(&(&1 >= tree_height)) |> sum_or_default(1, rows - row - 1)
+        down_trees
+        |> Enum.find_index(&(&1 >= tree_height))
+        |> sum_or_default(1, rows - row - 1)
 
       left_vis_score * right_vis_score * up_vis_score * down_vis_score
     end)
