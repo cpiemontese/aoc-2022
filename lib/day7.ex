@@ -30,7 +30,6 @@ defmodule Aoc2022.Day7 do
     {dir, _} =
       size_of_directories
       |> Enum.filter(fn {_, size} -> size >= space_to_free end)
-      |> IO.inspect()
       |> Enum.min_by(fn {_, size} -> size end)
 
     dir

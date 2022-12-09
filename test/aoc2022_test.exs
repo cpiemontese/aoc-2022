@@ -206,12 +206,31 @@ $ ls
 5626152 d.ext
 7214296 k"
 
-    test "first part is able to compute total size of directories with at most 100_000 of size" do
+    test "first part is able to compute total size of directories of example" do
       result = @input |> mk_tmp_file() |> Aoc2022.Day7.first()
       assert result == 95_437
     end
 
-    test "first part is able to compute total size of directories with at most 100_000 of size from official input" do
+    test "first part is able to compute total size of custom example" do
+      custom_input = "$ cd /
+$ ls
+dir a
+dir b
+1 c
+$ cd a
+$ ls
+1 d
+1 e
+$ cd ..
+$ cd b
+$ ls
+1 f
+1 g"
+      result = custom_input |> mk_tmp_file() |> Aoc2022.Day7.first()
+      assert result == 9
+    end
+
+    test "first part is able to compute total size of directories of official input" do
       result = Aoc2022.Day7.first("inputs/day7.txt")
       assert result == 1_443_806
     end
