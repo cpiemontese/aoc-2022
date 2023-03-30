@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: aoc-2022
+  annotations:
+    github.com/project-slug: cpiemontese/aoc-2022
+spec:
+  type: other
+  lifecycle: unknown
+  owner: team-shared-services
